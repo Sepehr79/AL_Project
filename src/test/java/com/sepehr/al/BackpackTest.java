@@ -1,7 +1,6 @@
 package com.sepehr.al;
 
 import java.util.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,6 +30,18 @@ public class BackpackTest {
 		
 		Assert.assertEquals(backpack.getProfit(), 40);
 		Assert.assertEquals(backpack.getWeight(), 7);
+		
+		
+		// Test get sorted products
+		List<Product> sortedProduct = backpack.getSortedProducts(backpack.getProducts());
+		
+		Product firstProduct = sortedProduct.get(0);
+		
+		Assert.assertEquals(firstProduct.getProfit(), 10);
+		
+		Product lastProduct = sortedProduct.get(sortedProduct.size() - 1);
+		
+		Assert.assertEquals(lastProduct.getWeight(), 5);
 	}
 	
 	@Test
@@ -76,6 +87,23 @@ public class BackpackTest {
 		// Test adding best products using recursion by Brute-Force algorithm
 		Assert.assertEquals(backpack.getWeight(), 45);
 		Assert.assertEquals(backpack.getProfit(), 64);
+	}
+	
+	@Test
+	public void testGetBestGreedyProfit() {
+		Product product1 = new Product(5, 20); // 4
+		Product product2 = new Product(10, 30); // 3
+		Product product3 = new Product(10, 20); // 2
+		Product product4 = new Product(5, 30); // 6
+		
+		List<Product> products = Arrays.asList(product1, product2, product3, product4);
+		
+		
+		Backpack backpack = new Backpack(15);
+		
+		int bestGreedyProfit = backpack.getBestGreedyProfit(products);
+		
+		Assert.assertEquals(bestGreedyProfit, 65);
 	}
 	
 }
