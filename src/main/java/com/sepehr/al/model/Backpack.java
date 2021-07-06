@@ -1,9 +1,12 @@
 package com.sepehr.al.model;
 
+import java.lang.constant.DynamicCallSiteDesc;
+import java.time.zone.ZoneRulesException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PrimitiveIterator.OfDouble;
+import java.util.function.ToDoubleBiFunction;
 import java.util.logging.Logger;
 
 public class Backpack {
@@ -45,11 +48,52 @@ public class Backpack {
 	}
 	
 	
+	/**
+	 * Add best products to the backpack
+	 * @param products
+	 * @return list of best products
+	 */
 	public List<Product> addProducts(List<Product> products) {
 		this.products.addAll(recursiveAddProducts(capacity, products));  
 		this.capacity -= getWeight();
 		return this.products;
 	}
+	
+	/**
+	 * @param products
+	 * @return best profit of products
+	 */
+	public int getBestProfit(List<Product> products) {
+		return getBestProfit(capacity, products);
+	}
+	
+	/**
+	 * Solve 0-1 Knapsack problem using dynamic programming
+	 * @return best profit of products
+	 */
+	private int getBestProfit(int weight, List<Product> products) {
+		int T[][] = new int[products.size() + 1][weight + 1];
+		
+		for (int i = 0; i <= products.size(); i++) {
+			for (int w = 0; w <= weight; w++) {
+				if (i == 0 || w == 0) {
+					T[i][w] = 0;
+				}else if (products.get(i - 1).getWeight() <= w) {
+					T[i][w] = Math.max
+							(
+					products.get(i - 1).getProfit() + T[i - 1][w - products.get(i - 1).getWeight()]
+							,
+					T[i - 1][w]
+							);
+				}else {
+					T[i][w] = T[i - 1][w];
+				}
+			}
+		}
+		
+		return T[products.size()][weight];
+	}
+	
 	
 	/**
 	 * Solve 0-1 Knapsack problem using recursion 
@@ -81,6 +125,7 @@ public class Backpack {
 		return new LinkedList<Product>();
 	}
 	
+	
 	private int getWeight(List<Product> products) {
 		int weight = 0;
 		for (Product product: products)
@@ -94,5 +139,7 @@ public class Backpack {
 			profit += product.getProfit();
 		return profit;
 	}
+	
+	
 	
 }

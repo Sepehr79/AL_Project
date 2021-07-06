@@ -42,7 +42,6 @@ public class BackpackTest {
 		
 		Backpack backpack = new Backpack(10);
 		
-		
 		List<Product> products = new LinkedList<Product>();
 		products.add(product1);
 		products.add(product2);
@@ -68,8 +67,13 @@ public class BackpackTest {
 		products.addAll(Arrays.asList(product1, product2, product3, product4, product5));
 		
 		Backpack backpack = new Backpack(50);
+		
+		// Test get best profit using dynamic programming
+		Assert.assertEquals(backpack.getBestProfit(products), 64);
+		
 		backpack.addProducts(products);
 		
+		// Test adding best products using recursion by Brute-Force algorithm
 		Assert.assertEquals(backpack.getWeight(), 45);
 		Assert.assertEquals(backpack.getProfit(), 64);
 	}
