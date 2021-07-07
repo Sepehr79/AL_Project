@@ -26,9 +26,10 @@ public class Backpack {
 		return this.products;
 	}
 	
-	public boolean addProduct(Product work) {
-		if (getWeight() + work.getWeight() <= capacity) {
-			products.add(work);
+	public boolean addProduct(Product product) {
+		if (getWeight() + product.getWeight() <= capacity) {
+			products.add(product);
+			this.capacity -= product.getWeight();
 			return true;
 		}
 		return false;

@@ -21,6 +21,7 @@ public class Algorithms {
 	 */
 	public static List<Product> recursiveAddBestProducts(int weight ,List<Product> products) {
 		
+		// How many times this function is executed?
 		LOGGER.info("Execute recusive method for: " + recursionCounter++);
 		
 		if (products.size() == 1 && products.get(0).getWeight() <= weight) {
