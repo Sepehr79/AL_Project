@@ -29,4 +29,30 @@ public class BackPackTest {
 		Assert.assertEquals(backpack.getProducts().size(), 4);
 	}
 	
+	@Test
+	public void testAddingProductToBackpack() {
+		
+		Product product1 = new Product(5, 10); // Weight, profit
+		Product product2 = new Product(6, 20); 
+		Product product3 = new Product(7, 30); 
+		Product product4 = new Product(8, 40); 
+		
+		Backpack backpack = new Backpack(19);
+		
+		Assert.assertTrue(backpack.addProduct(product1));
+		Assert.assertEquals(backpack.getWeight(), 5);
+		Assert.assertEquals(backpack.getProfit(), 10);
+		
+		Assert.assertTrue(backpack.addProduct(product2));
+		Assert.assertEquals(backpack.getWeight(), 11);
+		Assert.assertEquals(backpack.getProfit(), 30);
+		
+		Assert.assertTrue(backpack.addProduct(product3));
+		Assert.assertEquals(backpack.getWeight(), 18);
+		Assert.assertEquals(backpack.getProfit(), 60);
+		
+		Assert.assertFalse(backpack.addProduct(product4));
+		
+	}
+	
 }

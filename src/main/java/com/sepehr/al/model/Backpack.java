@@ -21,15 +21,13 @@ public class Backpack {
 	 * @return list of best products
 	 */
 	public List<Product> addProducts(List<Product> products) {
-		this.products.addAll(Algorithms.recursiveAddBestProducts(capacity, products));  
-		this.capacity -= getWeight();
+		this.products.addAll(Algorithms.recursiveAddBestProducts(capacity - getWeight(), products));  
 		return this.products;
 	}
 	
 	public boolean addProduct(Product product) {
 		if (getWeight() + product.getWeight() <= capacity) {
 			products.add(product);
-			this.capacity -= product.getWeight();
 			return true;
 		}
 		return false;
