@@ -11,6 +11,8 @@ import com.sepehr.al.model.Product;
 
 public class AlgorithmsTest {
 	
+	private final Algorithms algorithms = Algorithms.getAllgorithms();
+	
 	@Test
 	public void testRecursiveAddBestProducts() {
 		
@@ -21,7 +23,7 @@ public class AlgorithmsTest {
 		List<Product> products = Arrays.asList(product1, product2, product3);
 		
 		// Get best products
-		List<Product> bestProducts = Algorithms.recursiveAddBestProducts(10, products);
+		List<Product> bestProducts = algorithms.recursiveAddBestProducts(10, products);
 		
 		Assert.assertEquals(bestProducts.size(), 2);
 		
@@ -42,7 +44,7 @@ public class AlgorithmsTest {
 		
 		List<Product> products = Arrays.asList(product1, product2, product3, product4, product5);
 		
-		int bestProfit = Algorithms.getBestProfit(50, products);
+		int bestProfit = algorithms.getBestProfit(50, products);
 		
 		Assert.assertEquals(bestProfit, 64);
 	}
@@ -56,7 +58,7 @@ public class AlgorithmsTest {
 		
 		List<Product> products = Arrays.asList(product1, product2, product3, product4);
 		
-		int bestGreedyProfit = Algorithms.getBestGreedyProfit(15, products);
+		int bestGreedyProfit = algorithms.getBestGreedyProfit(15, products);
 		
 		Assert.assertEquals(bestGreedyProfit, 65);
 	}

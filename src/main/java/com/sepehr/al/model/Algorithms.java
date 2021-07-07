@@ -11,15 +11,22 @@ public class Algorithms {
 	private static final Logger LOGGER = Logger.getLogger(Algorithms.class.getName());
 	private static int recursionCounter = 0;
 	
+	// Singleton
+	private static final Algorithms algorithms = new Algorithms();
+	
 	private Algorithms() {
 		
+	}
+	
+	public static Algorithms getAllgorithms() {
+		return algorithms;
 	}
 	
 	/**
 	 * Solve 0-1 Knapsack problem using recursion 
 	 * @return best list of products
 	 */
-	public static List<Product> recursiveAddBestProducts(int weight ,List<Product> products) {
+	public List<Product> recursiveAddBestProducts(int weight ,List<Product> products) {
 		
 		// How many times this function is executed?
 		LOGGER.info("Execute recusive method for: " + recursionCounter++);
@@ -50,7 +57,7 @@ public class Algorithms {
 	 * Solve 0-1 Knapsack problem using dynamic programming
 	 * @return best profit of products
 	 */
-	public static int getBestProfit(int weight, List<Product> products) {
+	public int getBestProfit(int weight, List<Product> products) {
 		int T[][] = new int[products.size() + 1][weight + 1];
 		LOGGER.info("Starting editing matrix: \n" + getMatrixView(T));
 		
@@ -82,7 +89,7 @@ public class Algorithms {
 	 * @param products
 	 * @return best profit using greedy algorithm
 	 */
-	public static int getBestGreedyProfit(int weight ,List<Product> products) {
+	public int getBestGreedyProfit(int weight ,List<Product> products) {
 		List<Product> sortedProducts = getSortedProducts(products);
 		int bestProfit = 0;
 		int maximumWeight = 0;
@@ -109,7 +116,7 @@ public class Algorithms {
 	/**
 	 * @return list of sorted products by (profit / weight)
 	 */
-	public static List<Product> getSortedProducts(List<Product> products) {
+	public List<Product> getSortedProducts(List<Product> products) {
 		return products.stream().sorted((product1, product2) -> {
 			Integer prof1 = product1.getProfit() / product1.getWeight();
 			Integer prof2 = product2.getProfit() / product2.getWeight();
@@ -122,7 +129,7 @@ public class Algorithms {
 	 * @param matrix
 	 * @return string view of matrix
 	 */
-	private static String getMatrixView(int[][] matrix) {
+	private String getMatrixView(int[][] matrix) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("\n");
 		
@@ -142,14 +149,14 @@ public class Algorithms {
 		return builder.toString();
 	}
 	
-	private static int getWeight(List<Product> products) {
+	private int getWeight(List<Product> products) {
 		int weight = 0;
 		for (Product product: products)
 			weight += product.getWeight();
 		return weight;
 	}
 	
-	private static int getProfit(List<Product> products) {
+	private int getProfit(List<Product> products) {
 		int profit = 0;
 		for (Product product: products)
 			profit += product.getProfit();

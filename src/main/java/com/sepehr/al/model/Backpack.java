@@ -9,9 +9,12 @@ public class Backpack {
 	private int capacity;
 	private final List<Product> products = new LinkedList<Product>();
 	
+	private final Algorithms algorithms;
+	
 	// Constructor
 	public Backpack(int capacity) {
 		this.capacity = capacity;
+		algorithms = Algorithms.getAllgorithms();
 	}
 	
 	
@@ -21,7 +24,7 @@ public class Backpack {
 	 * @return list of best products
 	 */
 	public List<Product> addProducts(List<Product> products) {
-		this.products.addAll(Algorithms.recursiveAddBestProducts(capacity - getWeight(), products));  
+		this.products.addAll(algorithms.recursiveAddBestProducts(capacity - getWeight(), products));  
 		return this.products;
 	}
 	
