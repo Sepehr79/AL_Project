@@ -1,5 +1,8 @@
 package com.sepehr.al.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -111,6 +114,39 @@ public class Algorithms {
 		}
 		
 		return bestProfit;
+	}
+	
+	/**
+	 * Backtracking
+	 * @param weight
+	 * @param products
+	 * @return best profit of products
+	 */
+	public int getBacktrackingBestProfit(int weight, List<Product> products) {
+		
+		List<Integer> numberIntegers = new ArrayList<Integer>();
+		
+		for (int i = 0; i < products.size(); i++) {
+			
+			// Copy from current list
+			List<Product> copiedList = new ArrayList<Product>(products);
+			
+			if (products.get(i).getWeight() <= weight) {
+				
+				// Removing current product
+				copiedList.remove(products.get(i));
+				
+				numberIntegers.add(getBacktrackingBestProfit(weight - products.get(i).getWeight(), copiedList));
+				
+				// Return best profit
+				return numberIntegers.stream().max(Integer::compare).get();
+				
+			}
+			return copiedList.stream().collect(Collectors.summingInt(Product::getProfit));
+		}
+		
+		return 0;
+		
 	}
 	
 	/**
