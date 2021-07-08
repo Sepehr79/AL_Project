@@ -2,6 +2,7 @@ package com.sepehr.al.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,29 +125,37 @@ public class Algorithms {
 	 */
 	public int getBacktrackingBestProfit(int weight, List<Product> products) {
 		
-		List<Integer> numberIntegers = new ArrayList<Integer>();
+		if (products.size() == 1) {
+			if (products.get(0).getWeight() <= weight) {
+				return products.get(0).getProfit();
+			}
+			return 0;
+		}
 		
-		for (int i = 0; i < products.size(); i++) {
+		// List of current depth numbers
+		List<Integer> numbersIntegers = new ArrayList<Integer>();
+		
+		for(int i = 0 ; i < products.size(); i++) {
 			
 			// Copy from current list
-			List<Product> copiedList = new ArrayList<Product>(products);
+			List<Product> copyProducts = new LinkedList<Product>(products);
+			
+			// Remove current product from copy list
+			copyProducts.remove(products.get(i));
 			
 			if (products.get(i).getWeight() <= weight) {
 				
-				// Removing current product
-				copiedList.remove(products.get(i));
+				numbersIntegers.add(products.get(i).getProfit() + getBacktrackingBestProfit(weight - products.get(i).getWeight(), copyProducts));
 				
-				numberIntegers.add(getBacktrackingBestProfit(weight - products.get(i).getWeight(), copiedList));
+			}else {
 				
-				// Return best profit
-				return numberIntegers.stream().max(Integer::compare).get();
+				numbersIntegers.add(0);
 				
 			}
-			return copiedList.stream().collect(Collectors.summingInt(Product::getProfit));
+			
 		}
 		
-		return 0;
-		
+		return numbersIntegers.stream().max(Integer::compareTo).get();
 	}
 	
 	/**

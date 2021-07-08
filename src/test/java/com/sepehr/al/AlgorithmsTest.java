@@ -65,16 +65,22 @@ public class AlgorithmsTest {
 	
 	@Test
 	public void testBacktrackingGetBestProfit() {
-		Product product1 = new Product(5, 20); // 4
+		Product product4 = new Product(5, 30); // 6
 		Product product2 = new Product(10, 30); // 3
 		Product product3 = new Product(10, 20); // 2
-		Product product4 = new Product(5, 30); // 6
+		Product product1 = new Product(5, 20); // 4
 		
 		List<Product> products = Arrays.asList(product1, product2, product3, product4);
 		
 		int bestProfit = algorithms.getBacktrackingBestProfit(15, products);
 		
-		Assert.assertEquals(bestProfit, 50);
+		Assert.assertEquals(bestProfit, 60);
+		
+		Product product5 = new Product(3, 50); // Weight, profit
+		Product product6 = new Product(4, 40); 
+		Product product7 = new Product(8, 60); 
+		
+		Assert.assertEquals(algorithms.getBacktrackingBestProfit(8, Arrays.asList(product5, product6, product7)), 90);
 	}
 	
 	
