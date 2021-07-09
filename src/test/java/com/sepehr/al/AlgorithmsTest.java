@@ -61,6 +61,7 @@ public class AlgorithmsTest {
 		Assertions.assertEquals(bestGreedyProfit, 65);
 	}
 	
+	@Tag("currentTest")
 	@Test
 	public void testBacktrackingGetBestProfit() {
 		Product product4 = new Product(5, 30); // 6

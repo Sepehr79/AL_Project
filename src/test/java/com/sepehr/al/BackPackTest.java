@@ -38,9 +38,6 @@ public class BackPackTest {
 		
 		Backpack backpack = new Backpack(19);
 		
-		
-		
-		
 		Assertions.assertTrue(backpack.addProduct(product1));
 		Assertions.assertEquals(backpack.getWeight(), 5);
 		Assertions.assertEquals(backpack.getProfit(), 10);
