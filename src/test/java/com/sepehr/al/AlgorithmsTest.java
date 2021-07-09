@@ -1,11 +1,9 @@
 package com.sepehr.al;
 
 import java.util.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 import com.sepehr.al.model.Algorithms;
-import com.sepehr.al.model.Backpack;
 import com.sepehr.al.model.Product;
 
 
@@ -25,13 +23,13 @@ public class AlgorithmsTest {
 		// Get best products
 		List<Product> bestProducts = algorithms.recursiveAddBestProducts(10, products);
 		
-		Assert.assertEquals(bestProducts.size(), 2);
+		Assertions.assertEquals(bestProducts.size(), 2);
 		
 		int sum = 0;
 		for(Product product: bestProducts)
 			sum += product.getProfit();
 		
-		Assert.assertEquals(sum, 90);
+		Assertions.assertEquals(sum, 90);
 	}
 	
 	@Test
@@ -46,7 +44,7 @@ public class AlgorithmsTest {
 		
 		int bestProfit = algorithms.getBestProfit(50, products);
 		
-		Assert.assertEquals(bestProfit, 64);
+		Assertions.assertEquals(bestProfit, 64);
 	}
 	
 	@Test
@@ -60,7 +58,7 @@ public class AlgorithmsTest {
 		
 		int bestGreedyProfit = algorithms.getBestGreedyProfit(15, products);
 		
-		Assert.assertEquals(bestGreedyProfit, 65);
+		Assertions.assertEquals(bestGreedyProfit, 65);
 	}
 	
 	@Test
@@ -74,13 +72,13 @@ public class AlgorithmsTest {
 		
 		int bestProfit = algorithms.getBacktrackingBestProfit(15, products);
 		
-		Assert.assertEquals(bestProfit, 60);
+		Assertions.assertEquals(bestProfit, 60);
 		
 		Product product5 = new Product(3, 50); // Weight, profit
 		Product product6 = new Product(4, 40); 
 		Product product7 = new Product(8, 60); 
 		
-		Assert.assertEquals(algorithms.getBacktrackingBestProfit(8, Arrays.asList(product5, product6, product7)), 90);
+		Assertions.assertEquals(algorithms.getBacktrackingBestProfit(8, Arrays.asList(product5, product6, product7)), 90);
 	}
 	
 	

@@ -3,8 +3,7 @@ package com.sepehr.al;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 import com.sepehr.al.model.Backpack;
 import com.sepehr.al.model.Product;
@@ -25,8 +24,8 @@ public class BackPackTest {
 		Backpack backpack = new Backpack(50);
 		backpack.addProducts(products);
 		
-		Assert.assertEquals(backpack.getProfit(), 64);
-		Assert.assertEquals(backpack.getProducts().size(), 4);
+		Assertions.assertEquals(backpack.getProfit(), 64);
+		Assertions.assertEquals(backpack.getProducts().size(), 4);
 	}
 	
 	@Test
@@ -39,19 +38,22 @@ public class BackPackTest {
 		
 		Backpack backpack = new Backpack(19);
 		
-		Assert.assertTrue(backpack.addProduct(product1));
-		Assert.assertEquals(backpack.getWeight(), 5);
-		Assert.assertEquals(backpack.getProfit(), 10);
 		
-		Assert.assertTrue(backpack.addProduct(product2));
-		Assert.assertEquals(backpack.getWeight(), 11);
-		Assert.assertEquals(backpack.getProfit(), 30);
 		
-		Assert.assertTrue(backpack.addProduct(product3));
-		Assert.assertEquals(backpack.getWeight(), 18);
-		Assert.assertEquals(backpack.getProfit(), 60);
 		
-		Assert.assertFalse(backpack.addProduct(product4));
+		Assertions.assertTrue(backpack.addProduct(product1));
+		Assertions.assertEquals(backpack.getWeight(), 5);
+		Assertions.assertEquals(backpack.getProfit(), 10);
+		
+		Assertions.assertTrue(backpack.addProduct(product2));
+		Assertions.assertEquals(backpack.getWeight(), 11);
+		Assertions.assertEquals(backpack.getProfit(), 30);
+		
+		Assertions.assertTrue(backpack.addProduct(product3));
+		Assertions.assertEquals(backpack.getWeight(), 18);
+		Assertions.assertEquals(backpack.getProfit(), 60);
+		
+		Assertions.assertFalse(backpack.addProduct(product4));
 		
 	}
 	
