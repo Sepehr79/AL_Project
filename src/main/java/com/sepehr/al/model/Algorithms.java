@@ -1,9 +1,6 @@
 package com.sepehr.al.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -14,6 +11,7 @@ public class Algorithms {
 	// Debugging
 	private static final Logger LOGGER = Logger.getLogger(Algorithms.class.getName());
 	private static int recursionCounter = 0;
+	private static int backtrackingProfit = 1;
 	
 	// Singleton
 	private static final Algorithms algorithms = new Algorithms();
@@ -124,6 +122,8 @@ public class Algorithms {
 	 * @return best profit of products
 	 */
 	public int getBacktrackingBestProfit(int weight, List<Product> products) {
+		LOGGER.info("Products at level " + backtrackingProfit++ + ": " + showProducts(products));
+		
 		
 		if (products.size() == 1) {
 			if (products.get(0).getWeight() <= weight) {
@@ -206,5 +206,17 @@ public class Algorithms {
 		for (Product product: products)
 			profit += product.getProfit();
 		return profit;
+	}
+	
+	public String showProducts(List<Product> products) {
+		StringBuilder builder = new StringBuilder();
+		
+		for(Product product: products) {
+			builder.append(product + ",,, ");
+		}
+		
+		builder.append("\n");
+		
+		return builder.toString();
 	}
 }
